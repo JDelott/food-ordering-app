@@ -1,5 +1,6 @@
 import { Roboto } from "next/font/google";
-import Header from "/Users/jacobdelott/domino/food-ordering-app/src/components/layout/Header.js";
+import Header from "../components/layout/Header";
+
 import "./globals.css";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
