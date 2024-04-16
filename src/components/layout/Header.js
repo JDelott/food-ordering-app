@@ -1,6 +1,11 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Header() {
+  const session = useSession();
+  console.log(session);
+  const status = session.status;
   return (
     <header className="flex items-center justify-between">
       <nav
@@ -16,6 +21,7 @@ export default function Header() {
         <Link href={""}>Contact</Link>
       </nav>
       <nav className="flex items-center gap-4  text-gray-500 font-semibold">
+        {status === "authenticated"}
         <Link href={"/login"}>Login</Link>
         <Link
           href={"/register"}
