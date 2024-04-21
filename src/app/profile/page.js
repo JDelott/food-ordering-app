@@ -32,10 +32,17 @@ export default function ProfilePage() {
     }
   }
 
-  function handleFileChange(ev) {
-    console.log(ev);
+  async function handleFileChange(ev) {
+    const files = ev.target.files;
+    if (files?.length === 1) {
+      const data = new FormData();
+      data.set("file", files[0]);
+      await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
+    }
   }
-
   if (status === "loading") {
     return "loading...";
   }
