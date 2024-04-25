@@ -9,8 +9,15 @@ export async function PUT(req) {
   const session = await getServerSession(authOptions);
   const email = session.user.email;
 
+  const update = {};
   if ("name" in data) {
-    await User.updateOne({ email }, { name: data.name });
+    update.name = data.name;
+  }
+  if ("image" in data) {
+    update.image = data.image;
+  }
+  if (Object.keys(update).length > 0) {
+    await User.updateOne({ email }, update);
   }
   return Response.json(true);
 }
