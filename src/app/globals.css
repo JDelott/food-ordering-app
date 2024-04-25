@@ -11,7 +11,7 @@ input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="text"] {
-    @apply block w-full my-2 rounded-xl;
+    @apply block w-full mb-2 rounded-xl;
     @apply border p-2 border-gray-300 bg-gray-100;
 }
 
@@ -22,6 +22,12 @@ input[type="text"]:disabled{
     @apply bg-gray-100 border-0 cursor-not-allowed text-gray-300;
 }
 
+label{
+    @apply text-gray-500 text-sm leading-tight;
+}
+label + input{
+    margin-top: -2px
+}
 
 button{
     @apply block w-full text-gray-700 font-semibold;
