@@ -17,6 +17,9 @@ export async function PUT(req) {
 export async function GET() {
   mongoose.connect(process.env.MONGO_URL);
   const session = await getServerSession(authOptions);
-  const email = session.user.email;
+  const email = session?.user?.email;
+  if (!email) {
+    return Response.json();
+  }
   return Response.json(await User.findOne({ email }));
 }
