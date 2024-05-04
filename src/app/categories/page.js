@@ -36,10 +36,11 @@ export default function CategoriesPage() {
       });
       setCategoryName("");
       fetchCategories();
+      setEditedCategory(null);
       if (response.ok) resolve();
       else reject();
     });
-    toast.promise(creationPromise, {
+    await toast.promise(creationPromise, {
       loading: editedCategory
         ? "Updating category..."
         : "Creating your new category...",
