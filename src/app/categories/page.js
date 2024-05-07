@@ -49,6 +49,27 @@ export default function CategoriesPage() {
     });
   }
 
+  async function handleDeleteClick(_id) {
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/categories?_id=" + _id, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+
+    await toast.promise(promise, {
+      loading: "Deleting...",
+      success: "Deleted",
+      error: "Error",
+    });
+
+    fetchCategories();
+  }
+
   if (profileLoading) {
     return "Loading user info";
   }
@@ -85,19 +106,29 @@ export default function CategoriesPage() {
         </div>
       </form>
       <div>
-        <h2 className="mt-8 text-sm text-gray-500">Edit category:</h2>
+        <h2 className="mt-8 text-sm text-gray-500">Existing categories:</h2>
         {categories?.length > 0 &&
           categories.map((c) => (
-            <button
-              onClick={() => {
-                setEditedCategory(c);
-                setCategoryName(c.name);
-              }}
+            <div
               key={c._id}
-              className="rounded-xl p-2 px-4 flex gap-1 cursor-pointer mb-1"
+              className="bg-gray-100 rounded-xl p-2 px-4 flex gap-1 mb-1"
             >
-              <span>{c.name}</span>
-            </button>
+              <div className="grow">{c.name}</div>
+              <div className="flex gap-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditedCategory(c);
+                    setCategoryName(c.name);
+                  }}
+                >
+                  Edit
+                </button>
+                <button onClick={() => handleDeleteClick(c._id)} type="button">
+                  Delete{" "}
+                </button>
+              </div>
+            </div>
           ))}
       </div>
     </section>
