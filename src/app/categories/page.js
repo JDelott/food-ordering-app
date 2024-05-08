@@ -1,4 +1,5 @@
 "use client";
+import DeleteButton from "@/components/DeleteButton";
 import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "@/components/UseProfile";
 import { useState, useEffect } from "react";
@@ -98,9 +99,18 @@ export default function CategoriesPage() {
               onChange={(ev) => setCategoryName(ev.target.value)}
             />
           </div>
-          <div className="pb-2">
+          <div className="pb-2 flex gap-2">
             <button className="border border-primary" type="Submit">
               {editedCategory ? "Update" : "Create"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditedCategory(null);
+                setCategoryName("");
+              }}
+            >
+              Cancel
             </button>
           </div>
         </div>
@@ -111,7 +121,7 @@ export default function CategoriesPage() {
           categories.map((c) => (
             <div
               key={c._id}
-              className="bg-gray-100 rounded-xl p-2 px-4 flex gap-1 mb-1"
+              className="bg-gray-100 rounded-xl p-2 px-4 flex gap-1 mb-1 items-center"
             >
               <div className="grow">{c.name}</div>
               <div className="flex gap-1">
@@ -124,9 +134,10 @@ export default function CategoriesPage() {
                 >
                   Edit
                 </button>
-                <button onClick={() => handleDeleteClick(c._id)} type="button">
-                  Delete{" "}
-                </button>
+                <DeleteButton
+                  label="Delete"
+                  onDelete={() => handleDeleteClick(c._id)}
+                />
               </div>
             </div>
           ))}
