@@ -1,41 +1,3 @@
-// "use client";
-// import { useProfile } from "@/components/UseProfile";
-// import UserForm from "@/components/layout/UserForm";
-// import UserTabs from "@/components/layout/UserTabs";
-// import { useParams } from "next/navigation";
-// import { useEffect, useState } from "react";
-
-// export default function EditUserPage() {
-//   const { loading, data } = useProfile();
-//   const [user, setUser] = useState(null);
-//   const { id } = useParams;
-
-//   useEffect(() => {
-//     fetch("api/users").then((res) => {
-//       res.json().then((users) => {
-//         const user = users.find((u) => u._id === id);
-//       });
-//     });
-//   }, []);
-
-//   if (loading) {
-//     return "Loading user profile...";
-//   }
-
-//   if (!data.admin) {
-//     return "Not an admin";
-//   }
-
-//   return (
-//     <section className="mt-8 mx-auto max-2-2xl">
-//       <UserTabs isAdmin={true} />
-//       <div className="mt-8">
-//         <UserForm user={user} />
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
@@ -50,9 +12,8 @@ export default function EditUserPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("/api/users").then((res) => {
-      res.json().then((users) => {
-        const user = users.find((u) => u._id === id);
+    fetch("/api/profile?_id=" + id).then((res) => {
+      res.json().then((user) => {
         setUser(user);
       });
     });
