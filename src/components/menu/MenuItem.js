@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
+import Image from "next/image";
 import { CartContext } from "@/components/AppContext";
 import toast from "react-hot-toast";
+import MenuItemTile from "@/components/menu/MenuItemTile";
 
 export default function MenuItem(menuItem) {
   const { image, name, description, basePrice, sizes, extraIngredientPrices } =
@@ -24,27 +26,34 @@ export default function MenuItem(menuItem) {
           onClick={() => setShowPopup(false)}
           className="fixed bg-black/80 inset-0 flex items-center h-full justify-center"
         >
-          <div className="bg-white p-4 rounded-md">test</div>
+          <div className="bg-white p-4 rounded-md">
+            <Image
+              src={image}
+              alt={name}
+              width={300}
+              height={200}
+              className="mx-auto"
+            />
+            <h2 className="text-lg font-bold text-center mb-2">{name}</h2>
+            <p className="text-center font-bold text-sm mb-2">{description}</p>
+            {sizes?.length > 0 && (
+              <div className="p-2">
+                <h3>Pick your size</h3>
+                {sizes.map((size) => (
+                  <label
+                    key={size.id}
+                    className="flex items-center gap-2 py-4 px-4 border rounded-md mb-1"
+                  >
+                    <input type="radio" name="size" /> {size.name} $
+                    {basePrice + size.price}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
-      <div className="bg-gray-200 p-4 rounded-lg text-center group hover:bg-white hover:shadow-2xl hover:shadow-black/25 transition-all">
-        <div className="text-center">
-          <img
-            src={image}
-            className="max-h-auto max-h-24 block mx-auto"
-            alt="pizza"
-          />
-        </div>
-        <h4 className="font-semibold text-xl my-3">{name} </h4>
-        <p className="text-gray-500 text-sm line-clamp-3">{description}</p>
-        <button
-          type="button"
-          onClick={handleAddToCartButtonClick}
-          className="mt-4 bg-primary text-white rounded-full px-8 py-2"
-        >
-          Add to cart ${basePrice}
-        </button>
-      </div>
+      <MenuItemTile onAddToCart={handleAddToCartButtonClick} {...menuItem} />
     </>
   );
 }
