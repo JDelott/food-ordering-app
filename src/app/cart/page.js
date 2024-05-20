@@ -48,7 +48,7 @@ export default function CartPage() {
           {cartProducts.length > 0 &&
             cartProducts.map((product, index) => (
               <div
-                className="flex gap-4 border-b py-2 mb-4 items-center"
+                className="flex gap-4 border-b py-4 mb-4 items-center"
                 key={product._id}
               >
                 <div className="w-24">
