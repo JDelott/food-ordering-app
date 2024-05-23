@@ -8,10 +8,10 @@ const OrderSchema = new Schema(
     postalCode: String,
     city: String,
     country: String,
-    cartProducts: Object,
+    cartProducts: [Object],
     paid: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-export const Order = models?.Order || model("order", OrderSchema);
+export const Order = models?.Order || model("Order", OrderSchema);
