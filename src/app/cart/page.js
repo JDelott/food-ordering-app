@@ -13,6 +13,14 @@ export default function CartPage() {
   const { data: profileData } = useProfile();
 
   useEffect(() => {
+    if (typeof window != "undefined") {
+      if (window.location.href.includes("canceled=1")) {
+        toast.error("Payment failed");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (profileData?.city) {
       const { phone, streetAddress, city, postalCode, country } = profileData;
       const addressFromProfile = {
@@ -59,6 +67,15 @@ export default function CartPage() {
       console.error("Checkout failed:", error.message);
       // Handle error: display a message to the user, log it, etc.
     }
+  }
+
+  if (cartProducts?.length === 0) {
+    return (
+      <section className="mt-8 text-center">
+        <SectionHeaders mainHeader="Cart" />
+        <p className="mt-4">Your shopping cart is empty</p>
+      </section>
+    );
   }
 
   return (
