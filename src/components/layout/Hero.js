@@ -58,7 +58,7 @@ export default function Hero() {
           </button>
         </div>
       </div>
-      <div className="relative" style={{ height: "300px" }}>
+      <div className="relative hidden md:block" style={{ height: "300px" }}>
         {" "}
         {/* Adjust height as needed */}
         <Image

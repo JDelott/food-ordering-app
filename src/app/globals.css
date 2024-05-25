@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-section.hero{
-    @apply grid;
+section.hero{ 
+    @apply block md:grid;
     grid-template-columns: .4fr .6fr;
+    
 }
 select,
 input[type="email"], 
