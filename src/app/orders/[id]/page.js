@@ -45,6 +45,9 @@ export default function OrderPage() {
           <p>We will call you when it is on the way</p>
         </div>
       </div>
+      {loadingOrder && (
+        <div>Loading order...</div>
+      )}
       {order && (
         <div className="grid grid-cols-2 gap-16">
           <div>

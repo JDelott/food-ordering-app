@@ -15,12 +15,12 @@ export async function GET(req) {
     return Response.json(await Order.findById(_id));
   }
 
-  if (userEmail) {
-    const userInfo = await UserInfo.findOne({ email: userEmail });
-    if (userInfo) {
-      isAdmin = userInfo.admin;
-    }
-  }
+  //   if (userEmail) {
+  //     const userInfo = await UserInfo.findOne({ email: userEmail });
+  //     if (userInfo) {
+  //       isAdmin = userInfo.admin;
+  //     }
+  //   }
 
   if (isAdmin) {
     return Response.json(await Order.find());
