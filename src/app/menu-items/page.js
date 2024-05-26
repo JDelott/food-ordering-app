@@ -44,7 +44,7 @@ export default function MenuItemsPage() {
               <Link
                 href={"/menu-items/edit/" + item._id}
                 className="bg-gray-200 rounded-lg p-4"
-                key={item.id}
+                key={item._id}
               >
                 <div className="relative">
                   <Image

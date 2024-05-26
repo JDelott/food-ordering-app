@@ -29,11 +29,10 @@ export default function OrderPage() {
   }, []);
 
   let subtotal = 0;
-  if (order?.cartProducts){
-    for (const product of order?.cartProducts){
+  if (order?.cartProducts) {
+    for (const product of order?.cartProducts) {
       subtotal += cartProductPrice(product);
     }
-
   }
 
   return (
@@ -45,29 +44,29 @@ export default function OrderPage() {
           <p>We will call you when it is on the way</p>
         </div>
       </div>
-      {loadingOrder && (
-        <div>Loading order...</div>
-      )}
+      {loadingOrder && <div>Loading order...</div>}
       {order && (
         <div className="grid md:grid-cols-2 md:gap-16">
           <div>
-            {order.cartProducts.map(product => (
-              <CartProduct product={product}/>
+            {order.cartProducts.map((product) => (
+              <CartProduct key={product._id} product={product} />
             ))}
             <div className="text-right py-2 text-gray-500 font-bold">
-              Subtotal: 
+              Subtotal:
               <span className="text-black inline-block w-8">${subtotal}</span>
-              <br/>
-              Delivery: 
+              <br />
+              Delivery:
               <span className="text-black inline-block w-8">$5</span>
-              <br/> 
-              Total: 
-              <span className="text-black inline-block w-8">${subtotal + 5}</span>
-              <br/>
-             </div>
+              <br />
+              Total:
+              <span className="text-black inline-block w-8">
+                ${subtotal + 5}
+              </span>
+              <br />
+            </div>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg">
-            <AddressInputs disabled={true} addressProps={...order} />
+            <AddressInputs disabled={true} addressProps={order} />
           </div>
         </div>
       )}

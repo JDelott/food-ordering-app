@@ -34,8 +34,8 @@ import Right from "../icons/Right";
 
 export default function Hero() {
   return (
-    <section className="hero mt-4">
-      <div className="py-4 md:py-12">
+    <section className="hero md:mt-4">
+      <div className="py-8 md:py-12">
         <h1 className="text-4xl font-semibold">
           Everything <br />
           is better <br />

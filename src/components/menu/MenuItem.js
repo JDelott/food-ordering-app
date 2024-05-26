@@ -75,7 +75,7 @@ export default function MenuItem(menuItem) {
                   <h3 className="text-center text-gray-700">Pick your size</h3>
                   {sizes.map((size) => (
                     <label
-                      key={size.id}
+                      key={size._id}
                       className="flex items-center gap-2 py-4 px-4 border rounded-md mb-2"
                     >
                       <input
@@ -95,13 +95,13 @@ export default function MenuItem(menuItem) {
                   <h3 className="text-center text-gray-700">Any extras?</h3>
                   {extraIngredientPrices.map((extraThing) => (
                     <label
-                      key={extraThing.id}
+                      key={extraThing._id}
                       className="flex items-center gap-2 py-4 px-4 border rounded-md mb-1"
                     >
                       <input
                         type="checkbox"
                         onClick={(ev) => handleExtraThingClick(ev, extraThing)}
-                        name={`extraThing-${extraThing.id}`}
+                        name={`extraThing-${extraThing._id}`}
                         onChange={() => setShowPopup(true)}
                       />
                       {extraThing.name} ${extraThing.price}

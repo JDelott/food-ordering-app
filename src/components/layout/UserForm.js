@@ -17,10 +17,10 @@ export default function UserForm({ user, onSave }) {
 
   function handleAddressChange(propName, value) {
     if (propName === "phone") setPhone(value);
-    if (propName === "streetAddress") setPhone(value);
-    if (propName === "postalCode") setPhone(value);
-    if (propName === "city") setPhone(value);
-    if (propName === "country") setPhone(value);
+    if (propName === "streetAddress") setStreetAddress(value);
+    if (propName === "postalCode") setPostalCode(value);
+    if (propName === "city") setCity(value);
+    if (propName === "country") setCountry(value);
   }
 
   return (
@@ -81,7 +81,7 @@ export default function UserForm({ user, onSave }) {
                 className=""
                 value={"1"}
                 checked={admin}
-                onClick={(ev) => setAdmin(ev.target.checked)}
+                onChange={(ev) => setAdmin(ev.target.checked)}
               />
               <span>Admin</span>
             </label>
