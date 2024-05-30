@@ -14,12 +14,20 @@ const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
       id: "credentials",
       credentials: {
-        username: {
+        email: {
           label: "Email",
           type: "email",
           placeholder: "test@example.com",
@@ -42,11 +50,38 @@ const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account.provider === "google") {
+        const { email } = user;
+
+        if (!email) {
+          throw new Error("Google user email is missing");
+        }
+
+        // Ensure the email is saved
+        await mongoose.connect(process.env.MONGO_URL);
+        const existingUser = await User.findOne({ email });
+
+        if (!existingUser) {
+          const newUser = new User({
+            name: user.name,
+            email: user.email,
+            image: user.image,
+          });
+          await newUser.save();
+        }
+      }
+
+      return true;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+
 // // src/app/api/auth/[...nextauth]/route.js
 // import clientPromise from "@/libs/mongoConnect";
 // import bcrypt from "bcrypt";
