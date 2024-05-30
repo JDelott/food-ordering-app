@@ -45,10 +45,7 @@ import { NextResponse } from "next/server";
 
 async function connectToDatabase() {
   if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGO_URL);
   }
 }
 
